@@ -61,12 +61,13 @@ export default function Albums() {
         setAlbums(data);
         console.log('🚀  data:', data);
 
-        setCurPreview({
-          id: data[0].id,
-          title: data[0].title,
-          photos: data[0].photos,
-        });
-        console.log('dddddddddddddddd', data);
+        !curPreview &&
+          setCurPreview({
+            id: data[0].id,
+            title: data[0].title,
+            photos: data[0].photos,
+          });
+        console.log('dddddddddddddddd', curPreview);
       })();
 
     return () => controller.abort();
@@ -91,7 +92,7 @@ export default function Albums() {
                   setCurPreview({ ...album });
                 }}
               >
-                #{album.id} :{album.title}
+                #{album.id}: {album.title}
               </button>
             </li>
           ))}

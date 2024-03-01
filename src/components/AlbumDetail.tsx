@@ -33,7 +33,11 @@ export default function AlbumDetail() {
         <div>여기는 상세 앨범 페이지 입니다: id = {id}</div>
         <div className='flex flex-wrap'>
           {photos.map((photo) => (
-            <img src={photo.thumbnailUrl} alt={photo.title}></img>
+            <img
+              key={photo.id}
+              src={photo.thumbnailUrl}
+              alt={photo.title}
+            ></img>
           ))}
         </div>
         <button className='bg-red-400' onClick={() => navigate('/')}>

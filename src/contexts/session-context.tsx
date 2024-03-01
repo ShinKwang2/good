@@ -5,7 +5,7 @@ import {
   useEffect,
   useReducer,
 } from 'react';
-import { getStorage, setStorage } from '../util/storage';
+import { getStorage, setStorage } from '../utils/storage';
 
 type SessionContextProps = {
   session: Session;
