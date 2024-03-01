@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { getStorage } from '../util/storage';
 import { useSession } from '../contexts/session-context';
 import PreviewPhotos, { Photo } from './PreviewPhotos';
 
@@ -24,7 +23,6 @@ export type Preview = {
 
 export default function Albums() {
   const [albums, setAlbums] = useState<Album[]>([]);
-  // const [previews, setPreviews] = useState<Preview[]>([]);
   const [curPreview, setCurPreview] = useState<Preview | null>(null);
 
   console.log('🚀  Albums  Albums:', 'Albums');
@@ -49,7 +47,7 @@ export default function Albums() {
           (e) =>
             `https://jsonplaceholder.typicode.com/photos?albumId=${e.id}&_limit=${LIMIT}`
         );
-        const requests = urls.map((url) => fetch(url));
+        const requests = urls.map((url) => fetch(url, { signal }));
         Promise.all(requests)
           .then((responses) => Promise.all(responses.map((r) => r.json())))
           .then((results) => {
@@ -68,11 +66,9 @@ export default function Albums() {
       <div className='flex flex-row'>
         <ul className='border border-sky-400 rounded-l text-start size-1/2'>
           {albums.map((album) => (
-            <li
-              key={album.id}
-              className='border border-emerald-400 hover:bg-red-400'
-            >
+            <li key={album.id} className='border border-emerald-400'>
               <button
+                className='size-full text-start hover:bg-red-400'
                 onClick={() => {
                   setCurPreview({ ...album });
                 }}

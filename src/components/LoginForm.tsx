@@ -5,7 +5,7 @@ import { useSession } from '../contexts/session-context';
 export default function LoginForm() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [id, setId] = useState<number>(0);
-  const { session, login } = useSession();
+  const { login } = useSession();
 
   const change = (e: ChangeEvent<HTMLInputElement>) => {
     setId(+e.currentTarget.value);
